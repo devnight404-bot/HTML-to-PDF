@@ -1,0 +1,13 @@
+{
+  "name": "nokere-pdf-service",
+  "version": "1.0.0",
+  "description": "HTML to PDF conversion service for Nokere Koerse tickets",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "puppeteer": "^22.0.0"
+  }
+}
