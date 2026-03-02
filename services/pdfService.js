@@ -85,18 +85,12 @@ async function convertHtmlToPdf(html, options = {}) {
       await page.setViewport(viewport);
     }
 
-    // ── Load HTML ─────────────────────────────────────────────────
-    // Use 'load' (not 'networkidle0') so we don't stall waiting for
-    // external CDN images. All hero/cyclist images are either base64-
-    // embedded or fetched by Puppeteer lazily — no need to block on them.
-    // Timeout raised to 120 s for large orders (100+ ticket pages).
     await page.setContent(html, {
       waitUntil: 'load',
       timeout: 120000,
     });
 
     // ── Generate PDF ──────────────────────────────────────────────
-    // timeout raised to 120 s — rendering 100+ A4 pages takes >30 s.
     const pdfBuffer = await page.pdf({
       format: options.format || 'A4',
       landscape: options.landscape || false,
